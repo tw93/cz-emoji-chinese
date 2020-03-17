@@ -12,22 +12,28 @@
     "name": "style"
   },
   {
-    "emoji": "💄",
-    "code": ":lipstick:",
-    "description": "更新UI和样式文件",
-    "name": "ui"
-  },
-  {
     "emoji": "✨",
     "code": ":sparkles:",
     "description": "引入新特性",
     "name": "feature"
   },
   {
+    "emoji": "🔩",
+    "code": ":nut_and_bolt:",
+    "description": "构建过程或辅助工具的变动",
+    "name": "chore"
+  },
+  {
     "emoji": "🔥",
     "code": ":fire:",
     "description": "移除代码/文件",
     "name": "prune"
+  },
+  {
+    "emoji": "💄",
+    "code": ":lipstick:",
+    "description": "更新UI和样式文件",
+    "name": "ui"
   },
   {
     "emoji": "📝",
