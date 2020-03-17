@@ -1,10 +1,10 @@
 {
-  "name": "cz-emoji",
-  "version": "1.2.1",
-  "description": "Commitizen adapter formatting commit messages using emojis.",
-  "author": "Nicolas Gryman <ngryman@gmail.com> (http://ngryman.sh/)",
+  "name": "cz-emoji-chinese",
+  "version": "0.1.1",
+  "description": "中文版本的 git-cz emojis 提示",
+  "author": "Tw93 <tw93@qq.com>",
   "license": "MIT",
-  "repository": "ngryman/cz-emoji",
+  "repository": "tw93/cz-emoji-chinese",
   "main": "index.js",
   "engines": {
     "node": ">=4"

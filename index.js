@@ -95,7 +95,7 @@ function createQuestions(config) {
       message:
         config.questions && config.questions.type
           ? config.questions.type
-          : "Select the type of change you're committing:",
+          : "选择提交的更改类型：",
       source: (answersSoFar, query) => {
         return Promise.resolve(query ? fuzzy.search(query) : choices)
       }
@@ -104,7 +104,7 @@ function createQuestions(config) {
       type: config.scopes ? 'list' : 'input',
       name: 'scope',
       message:
-        config.questions && config.questions.scope ? config.questions.scope : 'Specify a scope:',
+        config.questions && config.questions.scope ? config.questions.scope : '指定一个范围:',
       choices: config.scopes && [{ name: '[none]', value: '' }].concat(config.scopes),
       when: !config.skipQuestions.includes('scope')
     },
@@ -114,18 +114,9 @@ function createQuestions(config) {
       message:
         config.questions && config.questions.subject
           ? config.questions.subject
-          : 'Write a short description:',
+          : '写一个简短的描述:',
       maxLength: config.subjectMaxLength,
       filter: (subject, answers) => formatHead({ ...answers, subject })
-    },
-    {
-      type: 'input',
-      name: 'body',
-      message:
-        config.questions && config.questions.body
-          ? config.questions.body
-          : 'Provide a longer description:',
-      when: !config.skipQuestions.includes('body')
     },
     {
       type: 'input',
@@ -133,7 +124,7 @@ function createQuestions(config) {
       message:
         config.questions && config.questions.issues
           ? config.questions.issues
-          : 'List any issue closed (#1, #2, ...):',
+          : '列出已解决的 issue (#1, #2, ...):',
       when: !config.skipQuestions.includes('issues')
     }
   ]

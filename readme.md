@@ -2,7 +2,7 @@
 
 > Commitizen adapter formatting commit messages using emojis.
 
-**cz-emoji** allows you to easily use emojis in your commits using [commitizen].
+**cz-emoji-chinese** allows you to easily use emojis in your commits using [commitizen] with chinese.
 
 ```sh
 ? Select the type of change you are committing: (Use arrow keys)
@@ -18,16 +18,16 @@
 **Globally**
 
 ```bash
-npm install --global cz-emoji
+npm install --global cz-emoji-chinese
 
 # set as default adapter for your projects
-echo '{ "path": "cz-emoji" }' > ~/.czrc
+echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
 ```
 
 **Locally**
 
 ```bash
-npm install --save-dev cz-emoji
+npm install --save-dev cz-emoji-chinese
 ```
 
 Add this to your `package.json`:
@@ -35,7 +35,7 @@ Add this to your `package.json`:
 ```json
 "config": {
   "commitizen": {
-    "path": "cz-emoji"
+    "path": "cz-emoji-chinese"
   }
 }
 ```
@@ -176,7 +176,4 @@ module.exports = {
 
 ## License
 
-MIT © [Nicolas Gryman](http://ngryman.sh)
-
-[commitizen]: https://github.com/commitizen/cz-cli
-[inquirer.js]: https://github.com/SBoudrias/Inquirer.js/
+MIT © Tw93
