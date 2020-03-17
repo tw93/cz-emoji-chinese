@@ -93,7 +93,9 @@ function createQuestions(config) {
       type: 'autocomplete',
       name: 'type',
       message:
-        config.questions && config.questions.type ? config.questions.type : '选择提交的更改类型：',
+        config.questions && config.questions.type
+          ? config.questions.type
+          : "选择提交的更改类型:",
       source: (answersSoFar, query) => {
         return Promise.resolve(query ? fuzzy.search(query) : choices)
       }
@@ -107,14 +109,29 @@ function createQuestions(config) {
       when: !config.skipQuestions.includes('scope')
     },
     {
-      type: 'input',
+      type: 'maxlength-input',
       name: 'subject',
       message:
         config.questions && config.questions.subject
           ? config.questions.subject
           : '写一个简短的描述:',
-      require: true,
+      maxLength: config.subjectMaxLength,
+      validate: function(value) {
+        if (value) {
+          return true
+        }
+        return '必须输入改动描述';
+      },
       filter: (subject, answers) => formatHead({ ...answers, subject })
+    },
+    {
+      type: 'input',
+      name: 'body',
+      message:
+        config.questions && config.questions.body
+          ? config.questions.body
+          : '写一个更详细的描述:',
+      when: !config.skipQuestions.includes('body')
     },
     {
       type: 'input',

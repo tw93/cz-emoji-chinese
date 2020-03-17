@@ -18,12 +18,6 @@
     "name": "feature"
   },
   {
-    "emoji": "🔩",
-    "code": ":nut_and_bolt:",
-    "description": "构建过程或辅助工具的变动",
-    "name": "chore"
-  },
-  {
     "emoji": "🔥",
     "code": ":fire:",
     "description": "移除代码/文件",
