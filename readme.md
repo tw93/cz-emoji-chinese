@@ -1,6 +1,6 @@
 # cz-emoji-chinese
 
-> Commitizen adapter formatting commit messages using emojis.
+> 中文版本的 git-cz emoji 提示
 
 **cz-emoji-chinese** allows you to easily use emojis in your commits using [commitizen] with chinese.
 
