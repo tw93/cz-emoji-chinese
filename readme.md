@@ -6,13 +6,13 @@
 
 ```sh
 ? 选择提交的更改类型: (Use arrow keys or type to search)
-❯ fix      🐛  修复 Bug 
-  style    🎨  改进代码的结构/格式 
-  feature  ✨  引入新特性 
-  prune    🔥  移除代码/文件 
-  ui       💄  更新UI和样式文件 
-  docs     📝  写文档 
-  init     🎉  初始化提交 
+❯ fix      🐛  修复 Bug
+  style    🎨  改进代码的结构/格式
+  feature  ✨  引入新特性
+  prune    🔥  移除代码/文件
+  ui       💄  更新UI和样式文件
+  docs     📝  写文档
+  init     🎉  初始化提交
 ```
 
 ## Install
@@ -37,8 +37,8 @@ Add this to your `package.json`:
 ```json
 "config": {
   "commitizen": {
-    "path": "cz-emoji-chinese"
-  }
+     "path": "./node_modules/cz-emoji-chinese"
+  },
 }
 ```
 
@@ -132,7 +132,6 @@ An array of questions you want to skip:
 ```
 
 You can skip the following questions: `scope`, `body`, and `issues`. The `type` and `subject` questions are mandatory.
-
 
 #### Customize Questions
 
