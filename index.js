@@ -42,7 +42,9 @@ async function loadConfig() {
       .then(getConfig)
 
   const readFromLocalCzrc = () =>
-    readPkg().then(res => (res ? readFromCzrc(`${path.dirname(res.path)}/.czrc`) : null))
+    readPkg().then(res =>
+      res && res.path ? readFromCzrc(`${path.dirname(res.path)}/.czrc`) : null
+    )
 
   const readFromGlobalCzrc = () => readFromCzrc(homeDir('.czrc'))
 
@@ -93,9 +95,7 @@ function createQuestions(config) {
       type: 'autocomplete',
       name: 'type',
       message:
-        config.questions && config.questions.type
-          ? config.questions.type
-          : "选择提交的更改类型:",
+        config.questions && config.questions.type ? config.questions.type : '选择提交的更改类型:',
       source: (answersSoFar, query) => {
         return Promise.resolve(query ? fuzzy.search(query) : choices)
       }
@@ -120,7 +120,7 @@ function createQuestions(config) {
         if (value) {
           return true
         }
-        return '必须输入改动描述';
+        return '必须输入改动描述'
       },
       filter: (subject, answers) => formatHead({ ...answers, subject })
     },
@@ -128,9 +128,7 @@ function createQuestions(config) {
       type: 'input',
       name: 'body',
       message:
-        config.questions && config.questions.body
-          ? config.questions.body
-          : '写一个更详细的描述:',
+        config.questions && config.questions.body ? config.questions.body : '写一个更详细的描述:',
       when: !config.skipQuestions.includes('body')
     },
     {
