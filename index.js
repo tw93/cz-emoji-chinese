@@ -117,10 +117,11 @@ function createQuestions(config) {
           : '写一个简短的描述:',
       maxLength: config.subjectMaxLength,
       validate: function(value) {
-        if (value) {
+        const arr = value.split(" ");
+        if (arr && arr.length>1 && arr[0].length>3) {
           return true
         }
-        return '必须输入改动描述'
+        return '必须输入有效的改动描述'
       },
       filter: (subject, answers) => formatHead({ ...answers, subject })
     },
