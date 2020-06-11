@@ -1,6 +1,6 @@
 {
   "name": "cz-emoji-chinese",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "中文版本的 git-cz emoji 提示",
   "author": "Tw93 <tw93@qq.com>",
   "license": "MIT",

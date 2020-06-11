@@ -5,6 +5,7 @@
 **cz-emoji-chinese** allows you to easily use emojis in your commits using [commitizen] with chinese.
 
 ```sh
+❯ git cz
 ? 选择提交的更改类型: (Use arrow keys or type to search)
 ❯ fix      🐛  修复 Bug
   style    🎨  改进代码的结构/格式
@@ -20,7 +21,7 @@
 **Globally**
 
 ```bash
-npm install --global cz-emoji-chinese
+npm install --global commitizen cz-emoji-chinese
 
 # set as default adapter for your projects
 echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
@@ -29,7 +30,7 @@ echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
 **Locally**
 
 ```bash
-npm install --save-dev cz-emoji-chinese
+npm install --save-dev commitizen cz-emoji-chinese
 ```
 
 Add this to your `package.json`:
@@ -65,6 +66,39 @@ Configuring `cz-emoji-chinese` can be handled in the users home directory (`~/.c
 ```
 
 ### Configuration Options
+
+#### Skip Questions
+
+An array of questions you want to skip:
+
+```json
+{
+  "config": {
+    "cz-emoji-chinese": {
+      "skipQuestions": ["scope", "issues"]
+    }
+  }
+}
+```
+
+.czrc like this:
+
+```js
+{
+  "path": "cz-emoji-chinese",
+  "config": {
+    "cz-emoji-chinese": {
+      "skipQuestions": [
+        "issues",
+        "scope",
+        "body"
+      ]
+    }
+  }
+}
+```
+
+You can skip the following questions: `scope`, `body`, and `issues`. The `type` and `subject` questions are mandatory.
 
 #### Types
 
@@ -116,22 +150,6 @@ A boolean value that allows for an using a unicode value rather than the default
   }
 }
 ```
-
-#### Skip Questions
-
-An array of questions you want to skip:
-
-```json
-{
-  "config": {
-    "cz-emoji-chinese": {
-      "skipQuestions": ["scope", "issues"]
-    }
-  }
-}
-```
-
-You can skip the following questions: `scope`, `body`, and `issues`. The `type` and `subject` questions are mandatory.
 
 #### Customize Questions
 

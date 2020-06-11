@@ -31,7 +31,7 @@ function getEmojiChoices({ types, symbol }) {
 }
 
 async function loadConfig() {
-  const getConfig = obj => obj && obj.config && obj.config['cz-emoji']
+  const getConfig = obj => obj && obj.config && obj.config['cz-emoji-chinese']
 
   const readFromPkg = () => readPkg().then(res => getConfig(res.pkg))
 
