@@ -90,8 +90,7 @@ An array of questions you want to skip:
     "cz-emoji-chinese": {
       "skipQuestions": [
         "issues",
-        "scope",
-        "body"
+        "scope"
       ]
     }
   }
