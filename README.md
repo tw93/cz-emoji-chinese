@@ -23,8 +23,11 @@
 ```bash
 npm install --global commitizen cz-emoji-chinese
 
-# set as default adapter for your projects
+# Method 1: set as default adapter for your projects
 echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
+
+# Method 2: If you want minimalist mode, you can set it like this
+echo '{ "path": "cz-emoji-chinese", "config": { "cz-emoji-chinese": { "skipQuestions": [ "issues", "scope" ] } } }' > ~/.czrc
 ```
 
 **Locally**
