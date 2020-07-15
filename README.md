@@ -21,7 +21,7 @@
 **Globally**
 
 ```bash
-npm install --global commitizen cz-emoji-chinese
+sudo npm install commitizen cz-emoji-chinese --global
 
 # Method 1: set as default adapter for your projects
 echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
