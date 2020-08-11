@@ -1,14 +1,14 @@
-const fs = require('fs')
-const readPkg = require('read-pkg-up')
-const truncate = require('cli-truncate')
-const wrap = require('wrap-ansi')
-const pad = require('pad')
-const path = require('path')
-const fuse = require('fuse.js')
-const homeDir = require('home-dir')
-const util = require('util')
+const fs = require('fs');
+const readPkg = require('read-pkg-up');
+const truncate = require('cli-truncate');
+const wrap = require('wrap-ansi');
+const pad = require('pad');
+const path = require('path');
+const fuse = require('fuse.js');
+const homeDir = require('home-dir');
+const util = require('util');
 
-const types = require('./lib/types')
+const types = require('./lib/types');
 
 const defaultConfig = {
   types,
@@ -16,58 +16,58 @@ const defaultConfig = {
   skipQuestions: [''],
   subjectMaxLength: 75,
   subjectMinLength: 1
-}
+};
 
 function getEmojiChoices({ types, symbol }) {
   const maxNameLength = types.reduce(
     (maxLength, type) => (type.name.length > maxLength ? type.name.length : maxLength),
     0
-  )
+  );
 
   return types.map(choice => ({
     name: `${pad(choice.name, maxNameLength)}  ${choice.emoji}  ${choice.description}`,
     value: symbol ? choice.emoji : choice.code,
     code: choice.code
-  }))
+  }));
 }
 
 async function loadConfig() {
-  const getConfig = obj => obj && obj.config && obj.config['cz-emoji-chinese']
+  const getConfig = obj => obj && obj.config && obj.config['cz-emoji-chinese'];
 
-  const readFromPkg = () => readPkg().then(res => getConfig(res.pkg))
+  const readFromPkg = () => readPkg().then(res => getConfig(res.pkg));
 
   const readFromCzrc = dir =>
     util
       .promisify(fs.readFile)(dir, 'utf8')
       .then(JSON.parse, () => null)
-      .then(getConfig)
+      .then(getConfig);
 
   const readFromLocalCzrc = () =>
     readPkg().then(res =>
       res && res.path ? readFromCzrc(`${path.dirname(res.path)}/.czrc`) : null
-    )
+    );
 
-  const readFromGlobalCzrc = () => readFromCzrc(homeDir('.czrc'))
+  const readFromGlobalCzrc = () => readFromCzrc(homeDir('.czrc'));
 
   const config =
-    (await readFromPkg()) || (await readFromLocalCzrc()) || (await readFromGlobalCzrc())
+    (await readFromPkg()) || (await readFromLocalCzrc()) || (await readFromGlobalCzrc());
 
-  return { ...defaultConfig, ...config }
+  return { ...defaultConfig, ...config };
 }
 
 function formatScope(scope) {
-  return scope ? `(${scope})` : ''
+  return scope ? `(${scope})` : '';
 }
 
 function formatHead({ type, scope, subject }) {
   return [type, formatScope(scope), subject]
     .filter(Boolean)
     .map(s => s.trim())
-    .join(' ')
+    .join(' ');
 }
 
 function formatIssues(issues) {
-  return issues ? 'Closes ' + (issues.match(/#\d+/g) || []).join(', closes ') : ''
+  return issues ? 'Closes ' + (issues.match(/#\d+/g) || []).join(', closes ') : '';
 }
 
 /**
@@ -79,7 +79,7 @@ function formatIssues(issues) {
  * @private
  */
 function createQuestions(config) {
-  const choices = getEmojiChoices(config)
+  const choices = getEmojiChoices(config);
 
   const fuzzy = new fuse(choices, {
     shouldSort: true,
@@ -89,7 +89,7 @@ function createQuestions(config) {
     maxPatternLength: 32,
     minMatchCharLength: 1,
     keys: ['name', 'code']
-  })
+  });
 
   const questions = [
     {
@@ -98,7 +98,7 @@ function createQuestions(config) {
       message:
         config.questions && config.questions.type ? config.questions.type : '选择提交的更改类型:',
       source: (answersSoFar, query) => {
-        return Promise.resolve(query ? fuzzy.search(query) : choices)
+        return Promise.resolve(query ? fuzzy.search(query) : choices);
       }
     },
     {
@@ -118,16 +118,13 @@ function createQuestions(config) {
           : '写一个简短的描述:',
       maxLength: config.subjectMaxLength,
       validate: function(value) {
-        const arr = value.split(' ')
-        const minLength = config.subjectMinLength
-        console.log(arr)
-        if (arr && arr.length > 1 && arr[0].length > 3) {
-          return true
+        const arr = value.split(' ');
+        const minLength = config.subjectMinLength;
+        console.log(arr);
+        if (arr && arr.length > 1 && arr[0].length > 3 && arr[1].length >= minLength) {
+          return true;
         }
-        if (arr[1].length >= minLength) {
-          return true
-        }
-        return '必须输入有效的改动描述' + minLength > 1 && `，最短为${minLength}`
+        return '必须输入有效的改动描述' + minLength > 1 ? `，最短为${minLength}` : '';
       },
       filter: (subject, answers) => formatHead({ ...answers, subject })
     },
@@ -147,9 +144,9 @@ function createQuestions(config) {
           : '列出已解决的 issue (#1, #2, 无直接回车):',
       when: !config.skipQuestions.includes('issues')
     }
-  ]
+  ];
 
-  return questions
+  return questions;
 }
 
 /**
@@ -159,16 +156,16 @@ function createQuestions(config) {
  * @return {String} Formated git commit message
  */
 function format(answers) {
-  const { columns } = process.stdout
+  const { columns } = process.stdout;
 
-  const head = truncate(answers.subject, columns)
-  const body = wrap(answers.body || '', columns)
-  const footer = formatIssues(answers.issues)
+  const head = truncate(answers.subject, columns);
+  const body = wrap(answers.body || '', columns);
+  const footer = formatIssues(answers.issues);
 
   return [head, body, footer]
     .filter(Boolean)
     .join('\n\n')
-    .trim()
+    .trim();
 }
 
 /**
@@ -178,13 +175,13 @@ function format(answers) {
  */
 module.exports = {
   prompter: function(cz, commit) {
-    cz.prompt.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'))
-    cz.prompt.registerPrompt('maxlength-input', require('inquirer-maxlength-input-prompt'))
+    cz.prompt.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+    cz.prompt.registerPrompt('maxlength-input', require('inquirer-maxlength-input-prompt'));
 
     loadConfig()
       .then(createQuestions)
       .then(cz.prompt)
       .then(format)
-      .then(commit)
+      .then(commit);
   }
-}
+};
