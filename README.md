@@ -4,17 +4,7 @@
 
 **cz-emoji-chinese** allows you to easily use emojis in your commits using [commitizen] with chinese.
 
-```sh
-❯ git cz
-? 选择提交的更改类型: (Use arrow keys or type to search)
-❯ fix      🐛  修复 Bug
-  style    🎨  改进代码的结构/格式
-  feature  ✨  引入新特性
-  prune    🔥  移除代码/文件
-  ui       💄  更新UI和样式文件
-  docs     📝  写文档
-  init     🎉  初始化提交
-```
+![ScreenFlow](https://qpluspicture.oss-cn-beijing.aliyuncs.com/4To9Mo/ScreenFlow.gif)
 
 ## Install
 
