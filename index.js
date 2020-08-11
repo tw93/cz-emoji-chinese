@@ -15,7 +15,7 @@ const defaultConfig = {
   symbol: false,
   skipQuestions: [''],
   subjectMaxLength: 75,
-  subjectMinLength: 4
+  subjectMinLength: 1
 }
 
 function getEmojiChoices({ types, symbol }) {
@@ -119,11 +119,15 @@ function createQuestions(config) {
       maxLength: config.subjectMaxLength,
       validate: function(value) {
         const arr = value.split(' ')
-        console.log(arr);
+        const minLength = config.subjectMinLength
+        console.log(arr)
         if (arr && arr.length > 1 && arr[0].length > 3) {
           return true
         }
-        return '必须输入有效的改动描述'
+        if (arr[1].length >= minLength) {
+          return true
+        }
+        return '必须输入有效的改动描述' + minLength > 1 && `，最短为${minLength}`
       },
       filter: (subject, answers) => formatHead({ ...answers, subject })
     },
