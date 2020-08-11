@@ -117,9 +117,9 @@ function createQuestions(config) {
           ? config.questions.subject
           : '写一个简短的描述:',
       maxLength: config.subjectMaxLength,
-      minLength: config.subjectMinLength,
       validate: function(value) {
         const arr = value.split(' ')
+        console.log(arr);
         if (arr && arr.length > 1 && arr[0].length > 3) {
           return true
         }
