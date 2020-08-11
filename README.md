@@ -27,7 +27,7 @@ sudo npm install commitizen cz-emoji-chinese --global
 echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
 
 # Method 2: If you want minimalist mode, you can set it like this
-echo '{ "path": "cz-emoji-chinese", "config": { "cz-emoji-chinese": { "skipQuestions": [ "issues", "scope","body" ] } } }' > ~/.czrc
+echo '{ "path": "cz-emoji-chinese", "config": { "cz-emoji-chinese": { "skipQuestions": [ "issues", "scope","body" ],"subjectMinLength": 8 } } }' > ~/.czrc
 ```
 
 **Locally**
@@ -198,3 +198,9 @@ module.exports = {
 ## License
 
 MIT © Tw93
+
+## Changelog
+
+### 0.3.0
+
+- [+] add `subjectMinLength` for Config

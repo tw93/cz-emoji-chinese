@@ -14,7 +14,8 @@ const defaultConfig = {
   types,
   symbol: false,
   skipQuestions: [''],
-  subjectMaxLength: 75
+  subjectMaxLength: 75,
+  subjectMinLength: 4
 }
 
 function getEmojiChoices({ types, symbol }) {
@@ -116,9 +117,10 @@ function createQuestions(config) {
           ? config.questions.subject
           : '写一个简短的描述:',
       maxLength: config.subjectMaxLength,
+      minLength: config.subjectMinLength,
       validate: function(value) {
-        const arr = value.split(" ");
-        if (arr && arr.length>1 && arr[0].length>3) {
+        const arr = value.split(' ')
+        if (arr && arr.length > 1 && arr[0].length > 3) {
           return true
         }
         return '必须输入有效的改动描述'
