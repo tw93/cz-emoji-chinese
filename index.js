@@ -14,6 +14,7 @@ const defaultConfig = {
   types,
   symbol: false,
   skipQuestions: [''],
+  subjectMaxLength: 75,
   subjectMinLength: 1
 };
 
@@ -109,20 +110,21 @@ function createQuestions(config) {
       when: !config.skipQuestions.includes('scope')
     },
     {
-      type: 'input',
+      type: 'maxlength-input',
       name: 'subject',
       message:
         config.questions && config.questions.subject
           ? config.questions.subject
           : '写一个简短的描述:',
+      maxLength: config.subjectMaxLength,
       validate: function(value) {
         const arr = value.split(' ');
         const minLength = config.subjectMinLength;
-        const message = minLength > 1 ? `，长度不少于${minLength}` : '';
-        if (arr && arr.length > 1 && arr[0].length > 3 && arr[1].length >= minLength) {
+        if (arr && arr.length > 1 && arr[0].length > 3 && arr[1].length > minLength) {
           return true;
         }
-        return `必须输入改动描述${message}`;
+        const message = minLength > 1 ? `，长度不少于${minLength}` : '';
+        return `须输入改动描述${message}`;
       },
       filter: (subject, answers) => formatHead({ ...answers, subject })
     },
