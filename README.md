@@ -17,7 +17,7 @@ sudo npm i commitizen cz-emoji-chinese -g
 echo '{ "path": "cz-emoji-chinese" }' > ~/.czrc
 
 # Method 2: If you want minimalist mode, you can set it like this
-echo '{ "path": "cz-emoji-chinese", "config": { "cz-emoji-chinese": { "skipQuestions": [ "issues", "scope","body" ],"subjectMinLength": 6 } } }' > ~/.czrc
+echo '{ "path": "cz-emoji-chinese", "config": { "cz-emoji-chinese": { "skipQuestions": [ "issues", "scope","body" ],"subjectMinLength": 3 } } }' > ~/.czrc
 ```
 
 **Locally**
